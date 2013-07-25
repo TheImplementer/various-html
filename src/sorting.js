@@ -6,7 +6,7 @@ var sorting = (function() {
         array[latter] = tmp;
     };
 
-    var selectionSort= function(array) {
+    var selectionSort = function(array) {
         for (var i = 0; i < array.length; i++) {
             for (var j = i + 1; j < array.length; j++) {
                 if (array[j] < array[i]) {
@@ -16,7 +16,19 @@ var sorting = (function() {
         }
     };
 
+    var insertionSort = function(array) {
+    
+        for (var i = 1; i < array.length; ++i) {
+            var j = i;
+            while (j > 0 && array[j] < array[j-1]) {
+                swapArrayElements(array, j, j-1);
+                --j;
+            }
+        }
+    };
+
     return {
-        selectionSort: selectionSort
+        selectionSort: selectionSort,
+        insertionSort: insertionSort
     };
 })();
