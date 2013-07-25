@@ -39,22 +39,35 @@ var sorting = (function() {
         }
         swapArrayElements(array, i+1, end-1);
         return i+1;
-    }
+    };
 
-    var quickSortMethod = function(array, start, end) {
+    var inPlaceQuickSortMethod = function(array, start, end) {
         if (end <= start) return;
         var pivotIndex = quickSortPartitioner(array, start, end);
-        quickSortMethod(array, start, pivotIndex-1);
-        quickSortMethod(array, pivotIndex+1, end);
-    }
+        inPlaceQuickSortMethod(array, start, pivotIndex-1);
+        inPlaceQuickSortMethod(array, pivotIndex+1, end);
+    };
+
+    var inPlaceQuickSort = function(array) {
+        inPlaceQuickSortMethod(array, 0, array.length);
+    };
 
     var quickSort = function(array) {
-        quickSortMethod(array, 0, array.length);
-    }
+        if (array.length === 0) return [];
+        var lastIndex = array.length - 1;
+        var pivot = array[lastIndex];
+        var lesser = [];
+        var greater = [];
+        for (var i = 0; i < lastIndex; ++i) {
+            (array[i] <= pivot ? lesser : greater).push(array[i]);
+        }
+        return quickSort(lesser).concat([pivot], quickSort(greater));
+    };
 
     return {
         selectionSort: selectionSort,
         insertionSort: insertionSort,
+        inPlaceQuickSort: inPlaceQuickSort,
         quickSort: quickSort
     };
 })();
