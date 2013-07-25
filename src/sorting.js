@@ -64,10 +64,34 @@ var sorting = (function() {
         return quickSort(lesser).concat([pivot], quickSort(greater));
     };
 
+    var mergeFunction = function(array1, array2) {
+        var result = [];
+        while(array1.length > 0 || array2.length > 0) {
+            if (array1.length === 0) result.push(array2.shift());
+            else if (array2.length === 0) result.push(array1.shift());
+            else result.push(array1[0] < array2[0] ? array1.shift() : array2.shift());
+        }
+        return result;
+    }
+
+    var mergeSortMethod = function(array, start, end) {
+        if (end <= start) return [];
+        if (end - start === 1) return [array[start]];
+        var midIndex = Math.ceil((end-start)/2);
+        var lower = mergeSortMethod(array, start, midIndex);
+        var upper = mergeSortMethod(array, midIndex, end);
+        return mergeFunction(lower, upper);
+    }
+
+    var mergeSort = function(array) {
+        return mergeSortMethod(array, 0, array.length);
+    }
+
     return {
         selectionSort: selectionSort,
         insertionSort: insertionSort,
         inPlaceQuickSort: inPlaceQuickSort,
-        quickSort: quickSort
+        quickSort: quickSort,
+        mergeSort: mergeSort
     };
 })();
