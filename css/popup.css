@@ -1,0 +1,41 @@
+#popupWrapper {
+	width: 100%;
+	height: 100%;
+	background-color: #cccccc;
+	z-index: 1000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0.5;
+	text-align: center;
+}
+#popupEl {
+	margin: auto;
+	width: 400px;
+	background-color: #ffffff;
+	border: 1px solid black;
+	padding: 15px 10px 15px 10px;
+	border-radius: 8px;
+}
+#popupTitle {
+	width: 100%;
+	text-align: left;
+	font-weight: bold;
+}
+#popupMessage {
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+#popupClose {
+	border: 2px solid #aaaaaa;
+	background-color: lightblue;
+	margin: 10px auto 10px auto;
+	padding: 3px 7px 3px 7px;
+	border-radius: 3px;
+}
+
+#popupClose:hover {
+	cursor: pointer;
+}
