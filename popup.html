@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Popup using jQuery</title>
+        <meta charset="utf-8" />
+        <script type="text/javascript" src="lib/jquery-2.0.3/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#create-popup").click(function() {
+                var popup = createPopup("Test", "This is just a test popup!");
+                document.body.appendChild(popup);
+                var wrapper = $("#popupWrapper");
+                var wrapperHeight = wrapper.height();
+                var wrapperWidth = wrapper.width();
+                $("#popup").css({
+                    "opacity": "0",
+                    "position": "absolute",
+                    "left": (wrapperWidth / 2 - 200) + "px",
+                    "top": (wrapperHeight / 2 - 100) + "px"
+                }).fadeTo("fast", 1);
+                $("#popupConfirm").click(function() {
+                    $("#popup").fadeOut("fast", function() {
+                        document.body.removeChild(popup);
+                    });
+                });
+            });
+        });
+
+        function createPopup(title, msg) {
+            var popupTitle = document.createElement("div");
+            popupTitle.id = "popupTitle";
+            popupTitle.innerHTML = title;
+            var popupBody = document.createElement("div");
+            popupBody.id = "popupBody";
+            popupBody.innerHTML = msg;
+            var popupConfirm = document.createElement("button");
+            popupConfirm.setAttribute("type", "button");
+            popupConfirm.id = "popupConfirm";
+            popupConfirm.innerHTML = "Ok";
+            var popup = document.createElement("div");
+            popup.id = "popup";
+            popup.appendChild(popupTitle);
+            popup.appendChild(popupBody);
+            popup.appendChild(popupConfirm);
+            var wrapper = document.createElement("div");
+            wrapper.id = "popupWrapper";
+            wrapper.appendChild(popup);
+            return wrapper;
+        }
+        </script>
+        <style rel="stylesheet" type="text/css">
+        #popupWrapper {
+            width: 100%;
+            height: 100%;
+            background-color: #cccccc;
+            z-index: 1000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.5;
+            text-align: center;
+        }
+        #popup {
+            margin: auto;
+            width: 400px;
+            height: 200px;
+            background-color: #ffffff;
+            border: 1px solid black;
+        }
+        #popupTitle {
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            font-weight: bold;
+        }
+        #popupBody {
+            width: 100%;
+            text-align: center;
+        }
+        #popupConfirm {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+        </style>
+    </head>
+    <body>
+        <button id="create-popup" type="button">Create Popup!</button>
+    </body>
+</html>
